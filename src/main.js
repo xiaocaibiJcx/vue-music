@@ -5,7 +5,7 @@ import App from './App'
 import fastclick from 'fastclick'
 
 import 'common/stylus/index.styl'
-fastclick.attach()
+fastclick.attach(document.body)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
