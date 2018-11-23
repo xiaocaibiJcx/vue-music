@@ -13,7 +13,11 @@
     "babel-runtime": "^6.26.0",
     "fastclick": "^1.0.6",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "better-scroll": "^1.13.2",
+    "jsonp": "^0.2.1",
+    "axios": "^0.18.0",
+    "vue-lazyload": "^1.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
