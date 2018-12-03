@@ -37,7 +37,8 @@
   import Slider from 'base/slider/slider'
   import Scroll from 'base/scroll/scroll'
   import Loading from 'base/loading/loading'
-  import {getRecommend, getDiscList,getSinger} from 'api/recommend'
+  import {getRecommend, getDiscList} from 'api/recommend'
+  import {getSingerList} from 'api/singer'
   import {ERR_OK} from 'api/config'
 
   export default {
@@ -72,9 +73,6 @@
     created() {
       this._getRecommend()
       this._getDiscList()
-      getSinger().then((res) => {
-        console.log(res.data);
-      })
     }
   }
 </script>
