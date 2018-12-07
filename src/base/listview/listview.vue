@@ -8,7 +8,9 @@
       <li v-for="group in data" class="list-group" ref="listGroup">
         <h2 class="list-group-title">{{group.title}}</h2>
         <ul>
-          <li v-for="item in group.items" class="list-group-item">
+          <li v-for="item in group.items"
+              @click="selectionItem(item)"
+              class="list-group-item">
             <img v-lazy="item.avatar" class="avatar">
             <span class="name">{{item.name}}</span>
           </li>
@@ -58,6 +60,9 @@
       }
     },
     methods: {
+      selectionItem(item) {
+        this.$emit('selection', item)
+      },
       touchstartShortcutList(e) {
         let appointIndex = getData(e.target, 'index')
         this.touch.y1 = e.touches[0].pageY
@@ -117,7 +122,6 @@
           if (-newY >= height1 && -newY < height2) {
             this.currentIndex = i
             this.diffly = height2 + newY
-            console.log(this.diffly);
             return
           }
           // -new 大于整个列表的高度时
@@ -125,12 +129,13 @@
         }
       },
       diffly(newVal) {
-        let fixedTop = (newVal > 0 && newVal < TITLE_HEIGHT) ? newVal : 0
+        let fixedTop = (newVal > 0 && newVal < TITLE_HEIGHT) ? newVal-TITLE_HEIGHT : 0
         if (fixedTop === this.fixedTop) {
           return
         }
         this.fixedTop = fixedTop
-        this.$refs.fixed.style.transform = `translate3d(0, ${fixedTop}px,0)`
+        this.$refs.fixed.style['transform'] = `translate3d(0, ${fixedTop}px,0)`
+        this.$refs.fixed.style['webkitTransform'] = `translate3d(0, ${fixedTop}px,0)`
       }
     },
     computed: {

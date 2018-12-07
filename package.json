@@ -17,6 +17,8 @@
     "better-scroll": "^1.13.2",
     "jsonp": "^0.2.1",
     "axios": "^0.18.0",
+    "vuex": "^3.0.1",
+    "js-base64": "^2.1.9",
     "vue-lazyload": "^1.0.2"
   },
   "devDependencies": {

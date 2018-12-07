@@ -1,7 +1,11 @@
 <template>
   <div class="singer" ref="singer">
-    <listview :data="singerList"></listview>
+    <listview
+      :data="singerList"
+      @selection="selection"></listview>
+    <router-view></router-view>
   </div>
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -9,6 +13,7 @@
   import {getSingerList} from 'api/singer'
   import Singer from 'common/js/singer'
   import listview from 'base/listview/listview'
+  import {mapMutations} from 'vuex'
 
   const HOT_NAME = '热门'
   const HOT_ENL = 10
@@ -20,6 +25,12 @@
       }
     },
     methods: {
+      selection(item) {
+        this.$router.push({
+          path: `/singer/${item.id}`
+        })
+        this.setSinger(item)
+      },
       _getSingerList() {
         getSingerList().then((res) => {
           if (res.code === ERR_OK) {
@@ -40,7 +51,7 @@
             map.hot.items.push(
               new Singer({
                 id: item.Fsinger_mid,
-                name: item.Fother_name
+                name: item.Fsinger_name || item.Fother_name
               }))
           }
           let key = item.Findex
@@ -52,7 +63,7 @@
           }
           map[key].items.push(new Singer({
             id: item.Fsinger_mid,
-            name: item.Fother_name
+            name: item.Fsinger_name || item.Fother_name
           }))
         })
         let hot = []
@@ -69,7 +80,10 @@
           return a.title.charCodeAt(0) - b.title.charCodeAt(0)
         })
         return hot.concat(ret)
-      }
+      },
+      ...mapMutations({
+        setSinger: 'SET_SINGER'
+      })
     },
     components: {
       listview

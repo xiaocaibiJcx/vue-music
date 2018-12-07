@@ -10,6 +10,7 @@
   export default {
     name: "scroll",
     props: {
+      // 滚动方式 3：实时滚动
       probeType: {
         type: Number,
         default: 1
@@ -36,6 +37,7 @@
           probeType: this.probeType,
           click: this.click
         })
+        // 监听滚动
         if (this.listenScroll) {
           let em = this
           this.scroll.on('scroll', (pos) => {
